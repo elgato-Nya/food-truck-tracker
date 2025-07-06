@@ -1,80 +1,49 @@
-# Food Truck Tracker
+# 🚚 Food Truck Tracker
 
-A comprehensive Flutter mobile app with Laravel backend for tracking food truck locations in real-time.
+Flutter mobile app with Laravel backend for tracking food truck locations in real-time.
 
-## ✅ **PROJECT STATUS: COMPLETED**
+## Features
 
-**🎉 All features implemented successfully!** See [FINAL_PROJECT_SUMMARY.md](FINAL_PROJECT_SUMMARY.md) for complete details.
+- **Flutter Mobile App**: Google Maps integration, dark/light mode, real-time updates
+- **Laravel Backend**: RESTful API with admin dashboard 
+- **Real-time Tracking**: Color-coded markers, pull-to-refresh, location updates
 
-### **Key Achievements:**
-- ✅ **Full dark mode implementation** with smooth animations
-- ✅ **Material 3 UI/UX design** throughout the app
-- ✅ **Google Maps integration** with color-coded markers
-- ✅ **Complete backend API** with admin dashboard
-- ✅ **State management** with Provider pattern
-- ✅ **Error handling** and loading states
-- ✅ **Responsive design** for all screen sizes
-
-## 🚀 Features
-
-### Mobile App (Flutter)
-- **Interactive Google Maps** showing food truck locations with real-time markers
-- **Color-coded markers** for different food types (coffee, BBQ, Mexican, etc.)
-- **Detailed truck information** with menu info and last reported time
-- **Dark/Light Mode Toggle** with smooth animations and persistent settings
-- **Responsive UI/UX** with Material 3 design principles
-- **Pull-to-refresh functionality** for real-time data updates
-- **About page** with developer information and app settings
-- **Error handling** with user-friendly error messages
-- **Loading states** with elegant progress indicators
-
-### Web Admin Panel (Laravel)
-- **Complete CRUD operations** for food trucks
-- **Location management** with coordinate input
-- **Active/inactive truck status** management
-- **Responsive dashboard** with statistics
-- **Modern UI** with Tailwind CSS styling
-- **Form validation** and error handling
-- **Success/error messaging** system
-
-### Backend API (Laravel)
-- **RESTful API endpoints** following industry standards
-- **MySQL database** with optimized schema
-- **CORS enabled** for Flutter app integration
-- **Health check endpoint** for monitoring
-- **Data validation** and error handling
-- **Sample data seeding** for testing
-
-## 🛠️ Setup Instructions
+## Quick Setup
 
 ### Prerequisites
-- Flutter SDK
-- Laragon (with PHP 8.2+ and MySQL)
-- Google Maps API Key
-- VS Code or Android Studio
+- Flutter SDK 3.8.1+
+- PHP 8.2+ with Laravel
+- Google Maps API key
 
-### 1. Google Maps API Key Setup
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select existing one
-3. Enable the following APIs:
-   - Maps SDK for Android
-   - Maps SDK for iOS (if building for iOS)
-   - Maps JavaScript API
-4. Create credentials → API Key
-5. Restrict the API key to your package name for security
-
-### 2. Backend Setup (Laravel)
-
-```powershell
-# Navigate to backend directory
+### Installation
+```bash
+# Backend
 cd backend
-
-# Install dependencies
 composer install
+cp .env.example .env
+php artisan key:generate migrate:fresh --seed
+php artisan serve
 
-# Copy environment file
-copy .env.example .env
+# Mobile  
+cd mobile
+flutter pub get
+flutter run
+```
+
+**Admin Dashboard**: http://localhost:8000/admin
+
+> See `mobile/README.md` and `backend/README.md` for detailed setup instructions.
+
+## Project Structure
+```
+food-truck-tracker/
+├── backend/          # Laravel API & Admin Dashboard  
+├── mobile/           # Flutter Mobile App
+└── README.md
+```
+
+## License
+MIT License
 
 # Generate application key
 php artisan key:generate

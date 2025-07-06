@@ -51,6 +51,8 @@ class FoodTruck extends Model
     // Format for API response
     public function toApiArray()
     {
+        $lastReportedAt = $this->last_reported_at ? Carbon::parse($this->last_reported_at) : null;
+        
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -61,8 +63,8 @@ class FoodTruck extends Model
             'menu_info' => $this->menu_info,
             'news' => $this->news,
             'reported_by' => $this->reported_by,
-            'last_reported_at' => $this->last_reported_at->toISOString(),
-            'last_reported_human' => $this->last_reported_at->diffForHumans(),
+            'last_reported_at' => $lastReportedAt ? $lastReportedAt->format('c') : null,
+            'last_reported_human' => $lastReportedAt ? $lastReportedAt->diffForHumans() : null,
         ];
     }
 }
