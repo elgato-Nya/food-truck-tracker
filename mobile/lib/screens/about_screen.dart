@@ -1,0 +1,370 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../providers/theme_provider.dart';
+
+class AboutScreen extends StatelessWidget {
+  const AboutScreen({super.key});
+
+  Future<void> _launchGitHub() async {
+    final Uri url = Uri.parse('https://github.com/student/food-truck-tracker');
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('About'),
+        actions: [
+          // Dark mode toggle in app bar
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return IconButton(
+                icon: Icon(
+                  themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                ),
+                onPressed: themeProvider.toggleTheme,
+                tooltip: themeProvider.isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+              );
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // App icon and name
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                color: const Color(0xFFEA580C),
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: const Icon(
+                Icons.local_dining,
+                size: 60,
+                color: Colors.white,
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            Text(
+              'Food Truck Tracker',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(
+              'Version 1.0.0',
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // Description
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                'Track your favorite food trucks around Kuala Lumpur! Find the best local food, see real-time locations, and discover new culinary experiences.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // Settings section
+            _buildSettingsCard(),
+
+            const SizedBox(height: 24),
+
+            // Developer info
+            _buildInfoCard(
+              context,
+              title: 'Developer',
+              items: [
+                _InfoItem(
+                  icon: Icons.person,
+                  label: 'Name',
+                  value: 'Student Developer', // Replace with your name
+                ),
+                _InfoItem(
+                  icon: Icons.school,
+                  label: 'Student Number',
+                  value: 'STU123456', // Replace with your student number
+                ),
+                _InfoItem(
+                  icon: Icons.code,
+                  label: 'Programme',
+                  value: 'Computer Science', // Replace with your programme
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 24),
+
+            // Project info
+            _buildInfoCard(
+              context,
+              title: 'Project Information',
+              items: [
+                _InfoItem(
+                  icon: Icons.flutter_dash,
+                  label: 'Built with',
+                  value: 'Flutter & Laravel',
+                ),
+                _InfoItem(
+                  icon: Icons.map,
+                  label: 'Maps',
+                  value: 'Google Maps Platform',
+                ),
+                _InfoItem(
+                  icon: Icons.api,
+                  label: 'Backend',
+                  value: 'Laravel REST API',
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 32),
+
+            // GitHub link
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _launchGitHub,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.code),
+                    SizedBox(width: 8),
+                    Text(
+                      'View on GitHub',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // Copyright
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).dividerColor),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.copyright,
+                    color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
+                    size: 20,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '© ${DateTime.now().year} Food Truck Tracker',
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'All rights reserved',
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodySmall?.color,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSettingsCard() {
+    return Consumer<ThemeProvider>(
+      builder: (context, themeProvider, child) {
+        return Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Theme.of(context).dividerColor),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Settings',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(
+                    themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                    size: 20,
+                    color: Theme.of(context).iconTheme.color,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      'Dark Mode',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
+                      ),
+                    ),
+                  ),
+                  Switch.adaptive(
+                    value: themeProvider.isDarkMode,
+                    onChanged: (value) => themeProvider.toggleTheme(),
+                    activeColor: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                themeProvider.isDarkMode 
+                  ? 'Enjoy the dark side! Your eyes will thank you.'
+                  : 'Let there be light! Classic and clean.',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).textTheme.bodySmall?.color,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildInfoCard(
+    BuildContext context, {
+    required String title,
+    required List<_InfoItem> items,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Theme.of(context).dividerColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          ...items.map((item) => Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: [
+                    Icon(
+                      item.icon,
+                      size: 20,
+                      color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
+                    ),
+                    const SizedBox(width: 12),
+                    Text(
+                      '${item.label}:',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).textTheme.bodySmall?.color,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        item.value,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).textTheme.bodyLarge?.color,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoItem {
+  final IconData icon;
+  final String label;
+  final String value;
+
+  _InfoItem({
+    required this.icon,
+    required this.label,
+    required this.value,
+  });
+}
