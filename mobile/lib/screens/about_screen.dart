@@ -7,7 +7,7 @@ class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   Future<void> _launchGitHub() async {
-    final Uri url = Uri.parse('https://github.com/student/food-truck-tracker');
+    final Uri url = Uri.parse('https://github.com/elgato-Nya/food-truck-tracker');
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
@@ -87,7 +87,7 @@ class AboutScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
@@ -108,28 +108,8 @@ class AboutScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Developer info
-            _buildInfoCard(
-              context,
-              title: 'Developer',
-              items: [
-                _InfoItem(
-                  icon: Icons.person,
-                  label: 'Name',
-                  value: 'Student Developer', // Replace with your name
-                ),
-                _InfoItem(
-                  icon: Icons.school,
-                  label: 'Student Number',
-                  value: 'STU123456', // Replace with your student number
-                ),
-                _InfoItem(
-                  icon: Icons.code,
-                  label: 'Programme',
-                  value: 'Computer Science', // Replace with your programme
-                ),
-              ],
-            ),
+            // Developers info
+            _buildDevelopersSection(context),
 
             const SizedBox(height: 24),
 
@@ -355,6 +335,135 @@ class AboutScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildDevelopersSection(BuildContext context) {
+    final developers = [
+      _Developer(
+        name: 'Mohamad Afiq bin Mohamad Sharifuzan',
+        studentId: '2023197751',
+        email: '2023197751@student.uitm.edu.my',
+      ),
+      _Developer(
+        name: 'Muhammad Afif Bin Mat Tarmizi',
+        studentId: '2023367671',
+        email: '2023197751@student.uitm.edu.my',
+      ),
+      _Developer(
+        name: 'Wan Muhammad Danish Aiman bin Wan Mohd Nazim',
+        studentId: '2023516353',
+        email: '2023516353@student.uitm.edu.my',
+      ),
+      _Developer(
+        name: 'Muhammad Hakimie Bin Ahmad Zikri',
+        studentId: '2023136019',
+        email: '2023136019@student.uitm.edu.my',
+      ),
+    ];
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Theme.of(context).dividerColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Development Team',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(height: 16),
+          ...developers.asMap().entries.map((entry) {
+            final index = entry.key;
+            final developer = entry.value;
+            return Column(
+              children: [
+                _buildDeveloperInfo(context, developer, index + 1),
+                if (index < developers.length - 1) 
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Divider(color: Theme.of(context).dividerColor),
+                  ),
+              ],
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDeveloperInfo(BuildContext context, _Developer developer, int number) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Developer $number',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        _buildDeveloperField(context, Icons.person, 'Name', developer.name),
+        const SizedBox(height: 6),
+        _buildDeveloperField(context, Icons.school, 'Student ID', developer.studentId),
+        const SizedBox(height: 6),
+        _buildDeveloperField(context, Icons.email, 'Email', developer.email),
+      ],
+    );
+  }
+
+  Widget _buildDeveloperField(BuildContext context, IconData icon, String label, String value) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          size: 16,
+          color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          '$label:',
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).textTheme.bodySmall?.color,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Developer {
+  final String name;
+  final String studentId;
+  final String email;
+
+  _Developer({
+    required this.name,
+    required this.studentId,
+    required this.email,
+  });
 }
 
 class _InfoItem {
