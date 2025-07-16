@@ -3,15 +3,22 @@ import 'package:provider/provider.dart';
 import 'providers/food_truck_provider.dart';
 import 'providers/theme_provider.dart';
 import 'screens/map_screen.dart';
+import 'screens/food_truck_list_screen.dart';
 import 'screens/about_screen.dart';
 import 'config/config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Load environment variables
   await Config.load();
-  
+
+  // Add debug prints
+  print('=== Food Truck Tracker Startup ===');
+  print('API Base URL: ${Config.apiBaseUrl}');
+  print('Google Maps API Key configured: ${Config.isGoogleMapsConfigured}');
+  print('===================================');
+
   runApp(const FoodTruckApp());
 }
 
@@ -29,13 +36,17 @@ class FoodTruckApp extends StatelessWidget {
         builder: (context, themeProvider, child) {
           return AnimatedTheme(
             duration: const Duration(milliseconds: 300),
-            data: themeProvider.isDarkMode ? themeProvider.darkTheme : themeProvider.lightTheme,
+            data: themeProvider.isDarkMode
+                ? themeProvider.darkTheme
+                : themeProvider.lightTheme,
             child: MaterialApp(
               title: 'Food Truck Tracker',
               debugShowCheckedModeBanner: false,
               theme: themeProvider.lightTheme,
               darkTheme: themeProvider.darkTheme,
-              themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+              themeMode: themeProvider.isDarkMode
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
               home: const MainScreen(),
             ),
           );
@@ -57,6 +68,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const MapScreen(),
+    const FoodTruckListScreen(),
     const AboutScreen(),
   ];
 
@@ -73,17 +85,16 @@ class _MainScreenState extends State<MainScreen> {
         },
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
-        backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        unselectedItemColor: Theme.of(
+          context,
+        ).textTheme.bodyMedium?.color?.withOpacity(0.6),
+        backgroundColor: Theme.of(
+          context,
+        ).bottomNavigationBarTheme.backgroundColor,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'About',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.map), label: 'Map'),
+          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'List'),
+          BottomNavigationBarItem(icon: Icon(Icons.info), label: 'About'),
         ],
       ),
     );

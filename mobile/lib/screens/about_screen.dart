@@ -7,7 +7,9 @@ class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
   Future<void> _launchGitHub() async {
-    final Uri url = Uri.parse('https://github.com/elgato-Nya/food-truck-tracker');
+    final Uri url = Uri.parse(
+      'https://github.com/elgato-Nya/food-truck-tracker',
+    );
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
@@ -27,7 +29,9 @@ class AboutScreen extends StatelessWidget {
                   themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
                 ),
                 onPressed: themeProvider.toggleTheme,
-                tooltip: themeProvider.isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+                tooltip: themeProvider.isDarkMode
+                    ? 'Switch to Light Mode'
+                    : 'Switch to Dark Mode',
               );
             },
           ),
@@ -63,7 +67,7 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             Text(
-              'Food Truck Tracker',
+              'Food Truck Tracker Malaysia',
               style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
@@ -74,10 +78,12 @@ class AboutScreen extends StatelessWidget {
             const SizedBox(height: 8),
 
             Text(
-              'Version 1.0.0',
+              'Version 2.0.0',
               style: TextStyle(
                 fontSize: 16,
-                color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
+                color: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.color?.withOpacity(0.6),
               ),
             ),
 
@@ -87,11 +93,13 @@ class AboutScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.surface.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
-                'Track your favorite food trucks around Kuala Lumpur! Find the best local food, see real-time locations, and discover new culinary experiences.',
+                'Discover Malaysia\'s best food trucks from Perlis to Johor, Sabah to Sarawak! '
+                'From traditional Nasi Lemak to modern fusion cuisine, find authentic Malaysian '
+                'street food wherever you are. Search, filter, and explore the rich culinary heritage of Malaysia.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -235,7 +243,9 @@ class AboutScreen extends StatelessWidget {
               Row(
                 children: [
                   Icon(
-                    themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                    themeProvider.isDarkMode
+                        ? Icons.dark_mode
+                        : Icons.light_mode,
                     size: 20,
                     color: Theme.of(context).iconTheme.color,
                   ),
@@ -259,9 +269,9 @@ class AboutScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                themeProvider.isDarkMode 
-                  ? 'Enjoy the dark side! Your eyes will thank you.'
-                  : 'Let there be light! Classic and clean.',
+                themeProvider.isDarkMode
+                    ? 'Enjoy the dark side! Your eyes will thank you.'
+                    : 'Let there be light! Classic and clean.',
                 style: TextStyle(
                   fontSize: 12,
                   color: Theme.of(context).textTheme.bodySmall?.color,
@@ -299,38 +309,40 @@ class AboutScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          ...items.map((item) => Padding(
-                padding: const EdgeInsets.only(bottom: 12),
-                child: Row(
-                  children: [
-                    Icon(
-                      item.icon,
-                      size: 20,
-                      color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                children: [
+                  Icon(
+                    item.icon,
+                    size: 20,
+                    color: Theme.of(context).iconTheme.color?.withOpacity(0.7),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    '${item.label}:',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.bodySmall?.color,
+                      fontWeight: FontWeight.w500,
                     ),
-                    const SizedBox(width: 12),
-                    Text(
-                      '${item.label}:',
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      item.value,
                       style: TextStyle(
                         fontSize: 14,
-                        color: Theme.of(context).textTheme.bodySmall?.color,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        item.value,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).textTheme.bodyLarge?.color,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -341,21 +353,25 @@ class AboutScreen extends StatelessWidget {
       _Developer(
         name: 'Mohamad Afiq bin Mohamad Sharifuzan',
         studentId: '2023197751',
+        programCode: 'CS2515A',
         email: '2023197751@student.uitm.edu.my',
       ),
       _Developer(
         name: 'Muhammad Afif Bin Mat Tarmizi',
         studentId: '2023367671',
-        email: '2023197751@student.uitm.edu.my',
+        programCode: 'CS2515A',
+        email: '2023367671@student.uitm.edu.my',
       ),
       _Developer(
         name: 'Wan Muhammad Danish Aiman bin Wan Mohd Nazim',
         studentId: '2023516353',
+        programCode: 'CS2515A',
         email: '2023516353@student.uitm.edu.my',
       ),
       _Developer(
         name: 'Muhammad Hakimie Bin Ahmad Zikri',
         studentId: '2023136019',
+        programCode: 'CS2515A',
         email: '2023136019@student.uitm.edu.my',
       ),
     ];
@@ -386,7 +402,7 @@ class AboutScreen extends StatelessWidget {
             return Column(
               children: [
                 _buildDeveloperInfo(context, developer, index + 1),
-                if (index < developers.length - 1) 
+                if (index < developers.length - 1)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     child: Divider(color: Theme.of(context).dividerColor),
@@ -399,7 +415,11 @@ class AboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDeveloperInfo(BuildContext context, _Developer developer, int number) {
+  Widget _buildDeveloperInfo(
+    BuildContext context,
+    _Developer developer,
+    int number,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -414,14 +434,31 @@ class AboutScreen extends StatelessWidget {
         const SizedBox(height: 8),
         _buildDeveloperField(context, Icons.person, 'Name', developer.name),
         const SizedBox(height: 6),
-        _buildDeveloperField(context, Icons.school, 'Student ID', developer.studentId),
+        _buildDeveloperField(
+          context,
+          Icons.school,
+          'Student ID',
+          developer.studentId,
+        ),
+        const SizedBox(height: 6),
+        _buildDeveloperField(
+          context,
+          Icons.code,
+          'Program Code',
+          developer.programCode,
+        ),
         const SizedBox(height: 6),
         _buildDeveloperField(context, Icons.email, 'Email', developer.email),
       ],
     );
   }
 
-  Widget _buildDeveloperField(BuildContext context, IconData icon, String label, String value) {
+  Widget _buildDeveloperField(
+    BuildContext context,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Row(
       children: [
         Icon(
@@ -457,11 +494,13 @@ class AboutScreen extends StatelessWidget {
 class _Developer {
   final String name;
   final String studentId;
+  final String programCode;
   final String email;
 
   _Developer({
     required this.name,
     required this.studentId,
+    required this.programCode,
     required this.email,
   });
 }
@@ -471,9 +510,5 @@ class _InfoItem {
   final String label;
   final String value;
 
-  _InfoItem({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
+  _InfoItem({required this.icon, required this.label, required this.value});
 }

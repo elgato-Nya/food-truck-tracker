@@ -16,4 +16,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/food-trucks/{foodTruck}/edit', [AdminController::class, 'edit'])->name('food-trucks.edit');
     Route::put('/food-trucks/{foodTruck}', [AdminController::class, 'update'])->name('food-trucks.update');
     Route::delete('/food-trucks/{foodTruck}', [AdminController::class, 'destroy'])->name('food-trucks.destroy');
+    
+    // Location reports
+    Route::get('/location-reports', [AdminController::class, 'locationReports'])->name('location-reports');
+    Route::post('/location-reports/{report}/approve', [AdminController::class, 'approveLocationReport'])->name('location-reports.approve');
+    Route::post('/location-reports/{report}/reject', [AdminController::class, 'rejectLocationReport'])->name('location-reports.reject');
 });

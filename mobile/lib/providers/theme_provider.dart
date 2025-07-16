@@ -28,7 +28,7 @@ class ThemeProvider with ChangeNotifier {
   ThemeData get lightTheme => ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
-    
+
     // Color Scheme
     colorScheme: const ColorScheme.light(
       primary: Color(0xFFEA580C), // Orange
@@ -36,12 +36,10 @@ class ThemeProvider with ChangeNotifier {
       secondary: Color(0xFFFB923C), // Light Orange
       secondaryContainer: Color(0xFFFEF3C7),
       surface: Colors.white,
-      background: Color(0xFFFAFAFA),
       error: Color(0xFFDC2626),
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: Color(0xFF1F2937),
-      onBackground: Color(0xFF1F2937),
       outline: Color(0xFFE5E7EB),
     ),
 
@@ -62,9 +60,7 @@ class ThemeProvider with ChangeNotifier {
     cardTheme: CardThemeData(
       elevation: 2,
       shadowColor: Colors.black.withOpacity(0.1),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     // Elevated Button Theme
@@ -74,9 +70,7 @@ class ThemeProvider with ChangeNotifier {
         foregroundColor: Colors.white,
         elevation: 2,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     ),
 
@@ -115,7 +109,7 @@ class ThemeProvider with ChangeNotifier {
   ThemeData get darkTheme => ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
-    
+
     // Color Scheme
     colorScheme: const ColorScheme.dark(
       primary: Color(0xFFFB923C), // Lighter orange for dark mode
@@ -123,12 +117,10 @@ class ThemeProvider with ChangeNotifier {
       secondary: Color(0xFFFBBF24), // Yellow accent
       secondaryContainer: Color(0xFF92400E),
       surface: Color(0xFF1F2937),
-      background: Color(0xFF111827),
       error: Color(0xFFF87171),
       onPrimary: Color(0xFF111827),
       onSecondary: Color(0xFF111827),
       onSurface: Color(0xFFF9FAFB),
-      onBackground: Color(0xFFF9FAFB),
       outline: Color(0xFF374151),
     ),
 
@@ -150,9 +142,7 @@ class ThemeProvider with ChangeNotifier {
       elevation: 4,
       color: const Color(0xFF1F2937),
       shadowColor: Colors.black.withOpacity(0.3),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     ),
 
     // Elevated Button Theme
@@ -162,9 +152,7 @@ class ThemeProvider with ChangeNotifier {
         foregroundColor: const Color(0xFF111827),
         elevation: 2,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
     ),
 

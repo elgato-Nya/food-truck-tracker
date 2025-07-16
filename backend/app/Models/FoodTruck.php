@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Carbon\Carbon;
 
 class FoodTruck extends Model
@@ -46,6 +47,22 @@ class FoodTruck extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    /**
+     * Get the location reports for this food truck
+     */
+    public function locationReports(): HasMany
+    {
+        return $this->hasMany(LocationReport::class);
+    }
+
+    /**
+     * Get pending location reports for this food truck
+     */
+    public function pendingLocationReports(): HasMany
+    {
+        return $this->hasMany(LocationReport::class)->where('status', 'pending');
     }
 
     // Format for API response
